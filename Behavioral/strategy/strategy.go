@@ -1,0 +1,53 @@
+package strategy
+
+import "fmt"
+
+///////////////////////////////////////////
+// 策略模式（Strategy）：
+// 感觉更像是依赖注入，把一个功能块儿直接注入到对象中
+// 调用动作不变，通过接口实现
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+
+type SortStrategy interface {
+	sort([]int) []int
+}
+
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+
+type BubbleSortStrategy struct {
+}
+
+func (bss *BubbleSortStrategy) sort(dataset []int) []int {
+	fmt.Println("Sorting using bubble sort")
+	return dataset
+}
+
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+
+type QuickSortStrategy struct {
+}
+
+func (qss *QuickSortStrategy) sort(dataset []int) []int {
+	fmt.Println("Sorting using quick sort")
+	return dataset
+}
+
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+
+type Sorter struct {
+	sortStrategy SortStrategy
+}
+
+func (s *Sorter) doSort(dataset []int) []int {
+	return s.sortStrategy.sort(dataset)
+}
+
+///////////////////////////////////////////
