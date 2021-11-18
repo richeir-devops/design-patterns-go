@@ -1,0 +1,106 @@
+package abstractfactory
+
+import "fmt"
+
+///////////////////////////////////////////
+// 抽象工厂模式（Abstract Factroy）：
+// 抽象工厂是从几个接口规范派生出的一些创造实例的工具
+// 其实可以按照依赖注入来理解
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+
+type Door interface {
+	getDescription()
+}
+
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+
+type WoodenDoor struct {
+}
+
+func (wd *WoodenDoor) getDescription() {
+	fmt.Println("I am a wooden door")
+}
+
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+
+type IronDoor struct {
+}
+
+func (id *IronDoor) getDescription() {
+	fmt.Println("I am a iron door")
+}
+
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+
+type DoorFittingExpert interface {
+	getDescription()
+}
+
+///////////////////////////////////////////
+
+type Welder struct {
+}
+
+func (w *Welder) getDescription() {
+	fmt.Println("I can only fit iron doors")
+}
+
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+
+type Carpenter struct {
+}
+
+func (c *Carpenter) getDescription() {
+	fmt.Println("I can only fit wooden doors")
+}
+
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+
+type DoorFactroy interface {
+	makeDoor() Door
+	makeFittingExpert() DoorFittingExpert
+}
+
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+
+type WoodenDoorFactroy struct {
+}
+
+func (wdf *WoodenDoorFactroy) makeDoor() Door {
+	return &WoodenDoor{}
+}
+
+func (wdf *WoodenDoorFactroy) makeFittingExpert() DoorFittingExpert {
+	return &Carpenter{}
+}
+
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+
+type IronDoorFactory struct {
+}
+
+func (i *IronDoorFactory) makeDoor() Door {
+	return &IronDoor{}
+}
+
+func (i *IronDoorFactory) makeFittingExpert() DoorFittingExpert {
+	return &Welder{}
+}
+
+///////////////////////////////////////////
